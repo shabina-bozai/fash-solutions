@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fash Solution LLC — Technology That Moves You Forward</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080A0F;
+    --white: #F4F3EF;
+    --accent: #00E5A0;
+    --accent2: #0057FF;
+    --mid: #1A1D26;
+    --muted: #5A5F72;
+    --border: rgba(255,255,255,0.07);
+    --card: #10131C;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(8,10,15,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--black) !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 100px;
+    font-weight: 600 !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0,229,160,0.3);
+    color: var(--black) !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(0,87,255,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 70%, rgba(0,229,160,0.08) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,229,160,0.1);
+    border: 1px solid rgba(0,229,160,0.25);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    width: fit-content;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    max-width: 900px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(244,243,239,0.3);
+  }
+
+  .hero h1 .highlight {
+    position: relative;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.7;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--black);
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,229,160,0.35);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.04);
+  }
+
+
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-section {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    background: var(--mid);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .marquee-item::after {
+    content: '◆';
+    color: var(--accent);
+    font-size: 0.5rem;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 4rem; }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    max-width: 600px;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 480px;
+    margin-top: 1rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── SERVICES ── */
+  .services { background: var(--black); }
+
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    gap: 2rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .service-card {
+    background: var(--card);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: #13161F; }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .service-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── WHY US ── */
+  .why { background: var(--mid); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 4rem;
+  }
+
+  .why-visual {
+    position: relative;
+    height: 460px;
+  }
+
+  .why-card {
+    position: absolute;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+  }
+
+  .why-card-main {
+    left: 0; top: 0;
+    width: 75%;
+    height: 65%;
+    background: linear-gradient(135deg, var(--card), #0D1020);
+  }
+
+  .why-card-stat {
+    right: 0; bottom: 20%;
+    width: 55%;
+    background: rgba(0,229,160,0.06);
+    border-color: rgba(0,229,160,0.15);
+  }
+
+  .why-card-mini {
+    left: 5%; bottom: 0;
+    width: 45%;
+    background: rgba(0,87,255,0.06);
+    border-color: rgba(0,87,255,0.15);
+  }
+
+  .wc-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .wc-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .wc-sub {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .why-point {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .why-point-icon {
+    width: 36px; height: 36px;
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .why-point-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .why-point-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── PROCESS ── */
+  .process { background: var(--black); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.3;
+  }
+
+  .process-step {
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .step-num {
+    width: 56px; height: 56px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .step-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── TECH STACK ── */
+  .tech { background: var(--mid); }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .tech-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-align: center;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .tech-pill:hover {
+    border-color: rgba(0,229,160,0.3);
+    color: var(--accent);
+    background: rgba(0,229,160,0.05);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--black); }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .testimonial-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(0,229,160,0.2);
+  }
+
+  .testimonial-stars {
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.92rem;
+    color: rgba(244,243,239,0.75);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .author-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--black);
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .author-role {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--mid);
+    text-align: center;
+    padding: 8rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,87,255,0.1) 0%, transparent 70%);
+  }
+
+  .cta-section .section-title {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+  }
+
+  .cta-section .section-sub {
+    margin: 1.5rem auto 0;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 4rem 4rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .footer-brand p {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li {
+    margin-bottom: 0.7rem;
+  }
+
+  .footer-col ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul a:hover { color: var(--accent); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    width: 36px; height: 36px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    border-color: rgba(0,229,160,0.3);
+    color: var(--accent);
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── CONTACT FORM ── */
+  .contact { background: var(--black); }
+
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    margin-top: 4rem;
+    align-items: start;
+  }
+
+  .contact-info-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-icon {
+    width: 40px; height: 40px;
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-detail-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-detail-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: rgba(0,229,160,0.4);
+  }
+
+  .form-group textarea {
+    height: 120px;
+    resize: vertical;
+  }
+
+  .form-group select option { background: var(--card); }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    padding: 0.95rem;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,229,160,0.35);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Fash<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#tech">Tech Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">Technology Solutions Partner</div>
+  <h1>
+    We Build Tech<br>
+    That <span class="highlight">Scales</span> With<br>
+    <em>Your Vision</em>
+  </h1>
+  <p class="hero-sub">
+    Fash Solution LLC delivers enterprise-grade software, cloud infrastructure, and digital transformation services that move your business forward — faster.
+  </p>
+
+
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Cloud Architecture</span>
+    <span class="marquee-item">API Development</span>
+    <span class="marquee-item">DevOps & CI/CD</span>
+    <span class="marquee-item">Digital Transformation</span>
+    <span class="marquee-item">Cybersecurity</span>
+    <span class="marquee-item">Data Engineering</span>
+    <span class="marquee-item">AI & Machine Learning</span>
+    <span class="marquee-item">Federal Compliance</span>
+    <span class="marquee-item">Cloud Architecture</span>
+    <span class="marquee-item">API Development</span>
+    <span class="marquee-item">DevOps & CI/CD</span>
+    <span class="marquee-item">Digital Transformation</span>
+    <span class="marquee-item">Cybersecurity</span>
+    <span class="marquee-item">Data Engineering</span>
+    <span class="marquee-item">AI & Machine Learning</span>
+    <span class="marquee-item">Federal Compliance</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-tag reveal">What We Do</div>
+      <h2 class="section-title reveal reveal-delay-1">End-to-End Technology Services</h2>
+    </div>
+    <p class="section-sub reveal reveal-delay-2">From strategy to deployment — we cover the full spectrum of modern technology needs.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-icon">☁️</div>
+      <div class="service-name">Cloud Solutions</div>
+      <p class="service-desc">Architecture, migration, and optimization across AWS, Azure, and GCP. FedRAMP compliant infrastructure built for scale and resilience.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚙️</div>
+      <div class="service-name">Software Engineering</div>
+      <p class="service-desc">Full-stack development with modern frameworks. REST APIs, microservices, and enterprise applications built for performance and maintainability.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔄</div>
+      <div class="service-name">DevOps & CI/CD</div>
+      <p class="service-desc">Pipeline automation, infrastructure as code, and continuous delivery practices that reduce time to market and eliminate deployment risk.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <div class="service-name">Cybersecurity</div>
+      <p class="service-desc">CMMC, FedRAMP, and FISMA compliance. Security assessments, penetration testing, and zero-trust architecture for federal and enterprise clients.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <div class="service-name">Data & Analytics</div>
+      <p class="service-desc">Data engineering pipelines, real-time analytics, and business intelligence platforms that turn raw data into actionable insights.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤖</div>
+      <div class="service-name">AI & Automation</div>
+      <p class="service-desc">Machine learning solutions, intelligent process automation, and AI-powered applications that drive efficiency and competitive advantage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="section-tag reveal">Why Fash Solution</div>
+  <h2 class="section-title reveal reveal-delay-1">Built Different.<br>Delivered Better.</h2>
+  <div class="why-grid">
+
+    <div class="why-visual reveal" style="display:flex; align-items:center; justify-content:center;">
+      <div style="position:relative; width:100%; max-width:400px; aspect-ratio:1;">
+        <!-- Outer ring -->
+        <div style="position:absolute; inset:0; border-radius:50%; border:1px solid rgba(0,229,160,0.12);"></div>
+        <!-- Mid ring -->
+        <div style="position:absolute; inset:15%; border-radius:50%; border:1px solid rgba(0,229,160,0.18);"></div>
+        <!-- Inner ring -->
+        <div style="position:absolute; inset:30%; border-radius:50%; border:1px solid rgba(0,229,160,0.28);"></div>
+        <!-- Core -->
+        <div style="position:absolute; inset:42%; border-radius:50%; background:radial-gradient(circle, rgba(0,229,160,0.25), rgba(0,87,255,0.15)); box-shadow:0 0 60px rgba(0,229,160,0.15);"></div>
+        <!-- Orbit dot top -->
+        <div style="position:absolute; top:8%; left:50%; transform:translateX(-50%); width:10px; height:10px; background:var(--accent); border-radius:50%; box-shadow:0 0 12px rgba(0,229,160,0.6);"></div>
+        <!-- Orbit dot right -->
+        <div style="position:absolute; top:50%; right:8%; transform:translateY(-50%); width:7px; height:7px; background:rgba(0,87,255,0.8); border-radius:50%; box-shadow:0 0 10px rgba(0,87,255,0.5);"></div>
+        <!-- Orbit dot bottom-left -->
+        <div style="position:absolute; bottom:14%; left:16%; width:8px; height:8px; background:rgba(0,229,160,0.6); border-radius:50%;"></div>
+        <!-- Cards floating -->
+        <div style="position:absolute; top:10%; left:-10%; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:0.9rem 1.2rem; white-space:nowrap;">
+          <div style="font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;">Approach</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; margin-top:0.2rem;">Outcome First</div>
+        </div>
+        <div style="position:absolute; bottom:12%; right:-8%; background:var(--card); border:1px solid rgba(0,229,160,0.2); border-radius:12px; padding:0.9rem 1.2rem; white-space:nowrap;">
+          <div style="font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;">Philosophy</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; margin-top:0.2rem; color:var(--accent);">Security Built-In</div>
+        </div>
+      </div>
+    </div>
+    <div class="why-points">
+      <div class="why-point reveal">
+        <div class="why-point-icon">🎯</div>
+        <div>
+          <div class="why-point-title">Outcome Focused</div>
+          <p class="why-point-desc">We measure success by business outcomes — not lines of code. Every engagement starts with understanding your goals first.</p>
+        </div>
+      </div>
+      <div class="why-point reveal reveal-delay-1">
+        <div class="why-point-icon">🔐</div>
+        <div>
+          <div class="why-point-title">Security First</div>
+          <p class="why-point-desc">Compliance and security are not afterthoughts. We embed CMMC, HIPAA, and federal standards into every layer of our solutions.</p>
+        </div>
+      </div>
+      <div class="why-point reveal reveal-delay-2">
+        <div class="why-point-icon">⚡</div>
+        <div>
+          <div class="why-point-title">Agile Delivery</div>
+          <p class="why-point-desc">Iterative, transparent delivery with clear milestones. You see progress every sprint — not just at the end of the project.</p>
+        </div>
+      </div>
+      <div class="why-point reveal reveal-delay-3">
+        <div class="why-point-icon">🤝</div>
+        <div>
+          <div class="why-point-title">True Partnership</div>
+          <p class="why-point-desc">We embed with your team, not above it. Knowledge transfer is built into every engagement so you own the outcome.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div style="text-align:center;">
+    <div class="section-tag reveal">How We Work</div>
+    <h2 class="section-title reveal reveal-delay-1" style="margin:0 auto;">Our Proven Process</h2>
+    <p class="section-sub reveal reveal-delay-2" style="margin:1rem auto 0;">A structured approach that eliminates guesswork and delivers results consistently.</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num">I</div>
+      <div class="step-title">Discover</div>
+      <p class="step-desc">Deep dive into your business goals, technical landscape, and constraints. We listen before we build.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-num">II</div>
+      <div class="step-title">Architect</div>
+      <p class="step-desc">Design a scalable, secure solution blueprint. Technology decisions grounded in your specific needs.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-num">III</div>
+      <div class="step-title">Deliver</div>
+      <p class="step-desc">Agile sprints with continuous feedback. Tested, documented, and production-ready code every iteration.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-num">IV</div>
+      <div class="step-title">Evolve</div>
+      <p class="step-desc">Post-launch support, monitoring, and continuous improvement. We grow with your business long term.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech" id="tech">
+  <div class="section-tag reveal">Our Stack</div>
+  <h2 class="section-title reveal reveal-delay-1">Technologies We Master</h2>
+  <p class="section-sub reveal reveal-delay-2">We work with the tools that are right for your problem — not just the ones we are comfortable with.</p>
+  <div class="tech-grid reveal">
+    <div class="tech-pill">Java / Spring Boot</div>
+    <div class="tech-pill">Angular</div>
+    <div class="tech-pill">React</div>
+    <div class="tech-pill">Node.js</div>
+    <div class="tech-pill">Python</div>
+    <div class="tech-pill">TypeScript</div>
+    <div class="tech-pill">Azure</div>
+    <div class="tech-pill">AWS</div>
+    <div class="tech-pill">GCP</div>
+    <div class="tech-pill">Kubernetes</div>
+    <div class="tech-pill">Docker</div>
+    <div class="tech-pill">Terraform</div>
+    <div class="tech-pill">Azure DevOps</div>
+    <div class="tech-pill">GitHub Actions</div>
+    <div class="tech-pill">PostgreSQL</div>
+    <div class="tech-pill">Oracle DB</div>
+    <div class="tech-pill">MongoDB</div>
+    <div class="tech-pill">Redis</div>
+    <div class="tech-pill">Kafka</div>
+    <div class="tech-pill">Elasticsearch</div>
+    <div class="tech-pill">Prometheus</div>
+    <div class="tech-pill">Grafana</div>
+    <div class="tech-pill">SonarQube</div>
+    <div class="tech-pill">Spring Security</div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-tag reveal">Client Stories</div>
+  <h2 class="section-title reveal reveal-delay-1">Trusted by Leaders</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Fash Solution transformed our claims processing system. What used to take days now runs in hours. Their team embedded seamlessly and delivered beyond our expectations."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MR</div>
+        <div>
+          <div class="author-name">Marcus Reynolds</div>
+          <div class="author-role">CTO, Federal Health Agency</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Their DevOps expertise cut our deployment time from two weeks to two hours. The CI/CD pipelines they built are rock solid and the team adopted them immediately."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SL</div>
+        <div>
+          <div class="author-name">Sandra Lee</div>
+          <div class="author-role">VP Engineering, FinTech Corp</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"CMMC compliance felt overwhelming until Fash Solution stepped in. They made it systematic, achievable, and embedded the right controls without disrupting our workflow."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">DK</div>
+        <div>
+          <div class="author-name">David Kim</div>
+          <div class="author-role">CISO, Defense Contractor</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-tag" style="justify-content:center; display:flex; margin-bottom:1rem;">Ready to Start</div>
+  <h2 class="section-title reveal" style="margin:0 auto; text-align:center;">
+    Let's Build Something<br>Remarkable Together
+  </h2>
+  <p class="section-sub reveal reveal-delay-1" style="text-align:center;">
+    Whether you are modernizing legacy systems, launching a new product, or scaling your infrastructure — reach out and let's talk.
+  </p>
+  <div class="cta-actions reveal reveal-delay-2">
+    <a href="/cdn-cgi/l/email-protection#abcdcad8c3d8c4c7dedfc2c4c5d8c7c7c8ebccc6cac2c785c8c4c6" class="btn-primary"><span class="__cf_email__" data-cfemail="f39592809b809c9f86879a9c9d809f9f90b3949e929a9fdd909c9e">[email&#160;protected]</span></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-tag reveal">Get In Touch</div>
+  <h2 class="section-title reveal reveal-delay-1">We'd Love to Hear From You</h2>
+  <p class="section-sub reveal reveal-delay-2" style="margin-top:1rem;">Have a project in mind or want to learn more about what we do? Drop us an email and we will get back to you promptly.</p>
+  <div style="margin-top:3rem;" class="reveal reveal-delay-3">
+    <a href="/cdn-cgi/l/email-protection#3b5d5a48534854574e4f525455485757587b5c565a525715585456" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--card);
+      border: 1px solid rgba(0,229,160,0.25);
+      border-radius: 16px;
+      padding: 1.4rem 2.5rem;
+      text-decoration: none;
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    " onmouseover="this.style.borderColor='rgba(0,229,160,0.6)'; this.style.boxShadow='0 8px 32px rgba(0,229,160,0.15)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(0,229,160,0.25)'; this.style.boxShadow='none'; this.style.transform='translateY(0)'">
+      <span style="font-size:1.3rem;">✉️</span>
+      <span class="__cf_email__" data-cfemail="254344564d564a4950514c4a4b56494946654248444c490b464a48">[email&#160;protected]</span>
+      <span style="color:var(--accent); margin-left:0.25rem;">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="font-size:1.5rem;">Fash<span style="color:var(--accent)">.</span></a>
+      <p>Enterprise technology solutions that scale with your vision. Trusted by federal agencies and Fortune 500 companies across the nation.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Cloud Solutions</a></li>
+        <li><a href="#">Software Engineering</a></li>
+        <li><a href="#">DevOps & CI/CD</a></li>
+        <li><a href="#">Cybersecurity</a></li>
+        <li><a href="#">Data & Analytics</a></li>
+        <li><a href="#">AI & Automation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Case Studies</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Compliance</h4>
+      <ul>
+        <li><a href="#">CMMC</a></li>
+        <li><a href="#">FedRAMP</a></li>
+        <li><a href="#">HIPAA</a></li>
+        <li><a href="#">Section 508</a></li>
+        <li><a href="#">FISMA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Fash Solution LLC. All rights reserved.</p>
+    <div class="footer-socials">
+      <a href="#" class="social-link">in</a>
+      <a href="#" class="social-link">tw</a>
+      <a href="#" class="social-link">gh</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  },
